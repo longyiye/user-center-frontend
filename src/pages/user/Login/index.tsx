@@ -77,9 +77,9 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
-          subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
+          logo={<img alt="logo" src="/logo.jpg" />}
+          title="用户中心管理系统"
+          subTitle={'用户中心管理系统 是一野做的第一个前后端分离项目'}
           initialValues={{
             autoLogin: true,
           }}
@@ -181,6 +181,7 @@ const Login: React.FC = () => {
                   const result = await getFakeCaptcha({
                     phone,
                   });
+                  // @ts-ignore
                   if (result === false) {
                     return;
                   }
