@@ -1,12 +1,12 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
-import { PageLoading, SettingDrawer } from '@ant-design/pro-components';
-import type { RunTimeLayoutConfig } from 'umi';
-import { history, Link } from 'umi';
+import {BookOutlined, LinkOutlined} from '@ant-design/icons';
+import type {Settings as LayoutSettings} from '@ant-design/pro-components';
+import {PageLoading, SettingDrawer} from '@ant-design/pro-components';
+import type {RunTimeLayoutConfig} from 'umi';
+import {history, Link} from 'umi';
 import defaultSettings from '../config/defaultSettings';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
 import {RequestConfig} from "@@/plugin-request/request";
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -19,7 +19,7 @@ export const initialStateConfig = {
 
 export const request: RequestConfig = {
   prefix: 'http://localhost:8080',
-  timeout: 10000,
+  timeout: 1000000,
 };
 
 /**
@@ -36,7 +36,6 @@ export async function getInitialState(): Promise<{
       const msg = await queryCurrentUser();
       return msg.data;
     } catch (error) {
-      history.push(loginPath);
     }
     return undefined;
   };
@@ -66,8 +65,12 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
+      const whiteList = ['/user/register', loginPath];
+      if (whiteList.includes(location.pathname)) {
+        return;
+      }
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      if (!initialState?.currentUser) {
         history.push(loginPath);
       }
     },
