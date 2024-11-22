@@ -1,10 +1,10 @@
 import Footer from '@/components/Footer';
-import {login} from '@/services/ant-design-pro/api';
-import {LockOutlined, UserOutlined,} from '@ant-design/icons';
-import {LoginForm, ProFormCheckbox, ProFormText,} from '@ant-design/pro-components';
-import {Alert, message, Tabs} from 'antd';
-import React, {useState} from 'react';
-import {history, Link, useModel} from 'umi';
+import { login } from '@/services/ant-design-pro/api';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
+import { Alert, message, Tabs } from 'antd';
+import React, { useState } from 'react';
+import { history, Link, useModel } from 'umi';
 import styles from './index.less';
 
 const LoginMessage: React.FC<{
@@ -20,7 +20,7 @@ const LoginMessage: React.FC<{
   />
 );
 const Login: React.FC = () => {
-  const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
+  const [userLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
   const fetchUserInfo = async () => {
@@ -52,7 +52,6 @@ const Login: React.FC = () => {
         history.push(redirect || '/');
         return;
       }
-      setUserLoginState(user);
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       message.error(defaultLoginFailureMessage);
@@ -110,9 +109,9 @@ const Login: React.FC = () => {
                   },
                   {
                     min: 8,
-                    type: "string",
+                    type: 'string',
                     message: '密码长度不能小于8位！',
-                  }
+                  },
                 ]}
               />
             </>
@@ -130,14 +129,14 @@ const Login: React.FC = () => {
           >
             <ProFormCheckbox noStyle name="autoLogin">
               自动登录
-             </ProFormCheckbox>
-            <Link to="/user/register" >注册账户</Link>
+            </ProFormCheckbox>
+            <Link to="/user/register">注册账户</Link>
             <a
-                style={{
-                  float: 'right',
-                }}
-                target="_blank"
-                rel="noreferrer"
+              style={{
+                float: 'right',
+              }}
+              target="_blank"
+              rel="noreferrer"
             >
               忘记密码 ?
             </a>
