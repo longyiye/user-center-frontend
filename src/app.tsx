@@ -21,7 +21,6 @@ export const initialStateConfig = {
 };
 
 export const request: RequestConfig = {
-  prefix: 'http://localhost:8080',
   timeout: 1000000,
 };
 
