@@ -1,16 +1,16 @@
 import Footer from '@/components/Footer';
-import {register} from '@/services/ant-design-pro/api';
-import {LockOutlined, UserOutlined,} from '@ant-design/icons';
-import {LoginForm, ProFormText,} from '@ant-design/pro-components';
-import {message, Tabs} from 'antd';
-import React, {useState} from 'react';
-import {history} from 'umi';
+import { register } from '@/services/ant-design-pro/api';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginForm, ProFormText } from '@ant-design/pro-components';
+import { message, Tabs } from 'antd';
+import React, { useState } from 'react';
+import { history } from 'umi';
 import styles from './index.less';
 
 const Register: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const handleSubmit = async (values: API.RegisterParams) => {
-    const {userPassword, checkPassword} = values;
+    const { userPassword, checkPassword } = values;
     //校验
     if (userPassword !== checkPassword) {
       message.error('两次密码不一致');
@@ -19,7 +19,7 @@ const Register: React.FC = () => {
     try {
       // 注册
       const id = await register(values);
-      if (id > 0) {
+      if (id) {
         const defaultLoginSuccessMessage = '注册成功！';
         message.success(defaultLoginSuccessMessage);
 
@@ -32,12 +32,10 @@ const Register: React.FC = () => {
           query,
         });
         return;
-      } else {
-        throw new Error('register error id = ${id}');
       }
-    } catch (error) {
+    } catch (error: any) {
       const defaultLoginFailureMessage = '注册失败，请重试！';
-      message.error(defaultLoginFailureMessage);
+      message.error(error.message ?? defaultLoginFailureMessage);
     }
   };
   return (
@@ -46,8 +44,8 @@ const Register: React.FC = () => {
         <LoginForm
           submitter={{
             searchConfig: {
-              submitText: '注册'  // 按钮文字
-            }
+              submitText: '注册', // 按钮文字
+            },
           }}
           logo={<img alt="logo" src="/logo.jpg" />}
           title="用户中心管理系统"
@@ -91,17 +89,17 @@ const Register: React.FC = () => {
                     message: '密码是必填项！',
                   },
                   {
-                    min: 8,
-                    type: "string",
-                    message: '密码长度不能小于8位！',
-                  }
+                    min: 4,
+                    type: 'string',
+                    message: '密码长度不能小于4位！',
+                  },
                 ]}
               />
               <ProFormText.Password
                 name="checkPassword"
                 fieldProps={{
                   size: 'large',
-                  prefix: <LockOutlined className={styles.prefixIcon}/>,
+                  prefix: <LockOutlined className={styles.prefixIcon} />,
                 }}
                 placeholder={'请确认密码'}
                 rules={[
@@ -110,10 +108,10 @@ const Register: React.FC = () => {
                     message: '确认密码是必填项！',
                   },
                   {
-                    min: 8,
-                    type: "string",
-                    message: '密码长度不能小于8位！',
-                  }
+                    min: 4,
+                    type: 'string',
+                    message: '密码长度不能小于4位！',
+                  },
                 ]}
               />
             </>
