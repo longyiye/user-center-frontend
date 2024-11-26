@@ -2,9 +2,11 @@ import { HeartTwoTone, SmileTwoTone } from '@ant-design/icons';
 import { PageHeaderWrapper } from '@ant-design/pro-components';
 import { Alert, Card, Typography } from 'antd';
 import React from 'react';
-const Admin: React.FC = () => {
+const Admin: React.FC = (props) => {
+  const { children } = props;
   return (
     <PageHeaderWrapper content={' 这个页面只有 admin 权限才能查看'}>
+      {children}
       <Card>
         <Alert
           message={'更快更强的重型组件，已经发布。'}
