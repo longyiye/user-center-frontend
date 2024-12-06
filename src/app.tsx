@@ -33,6 +33,9 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
+  // 验证本地 start 启动使用的环境
+  alert(process.env.NODE_ENV);
+
   const fetchUserInfo = async () => {
     try {
       return await queryCurrentUser();
