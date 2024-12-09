@@ -34,7 +34,7 @@ export async function getInitialState(): Promise<{
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   // 验证本地 start 启动使用的环境
-  alert(process.env.NODE_ENV);
+  // alert(process.env.NODE_ENV);
 
   const fetchUserInfo = async () => {
     try {
@@ -62,6 +62,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
+    logo: 'logo.jpg',
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {

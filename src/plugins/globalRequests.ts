@@ -12,7 +12,8 @@ import { stringify } from 'querystring';
  */
 const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
-  prefix: process.env.NODE_ENV === 'production' ? 'http://localhost:8080' : 'http://localhost:8080',
+  prefix:
+    process.env.NODE_ENV === 'production' ? 'http://8.148.26.198:90' : 'http://localhost:8080',
   // requestType: 'form',
 });
 

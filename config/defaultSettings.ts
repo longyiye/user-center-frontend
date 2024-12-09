@@ -14,7 +14,6 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: '用户中心管理系统',
   pwa: false,
-  logo: 'logo.jpg',
   iconfontUrl: '',
 };
 
